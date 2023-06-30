@@ -6,7 +6,10 @@ import { CompactRestaurantInfo } from "../restaurant/compact-restaurant-info";
 import { Text } from "../typography/text.component";
 
 const FavouritesWrapper = styled.View`
+  background-color: ${(props) => props.theme.colors.ui.quaternary};
   padding: 10px;
+  border-bottom-color: ${(props) => props.theme.colors.ui.secondary};
+  border-bottom-width: 3px;
 `;
 
 export const FavouritesBar = ({ favourites, onNavigate }) => {
@@ -16,14 +19,14 @@ export const FavouritesBar = ({ favourites, onNavigate }) => {
 
   return (
     <FavouritesWrapper>
-      <Spacer variant="left.large">
+      <Spacer pos="left" size="large">
         <Text variant="caption">Favourites</Text>
       </Spacer>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {favourites.map((restaurant) => {
           const key = restaurant.name.split(" ").join("");
           return (
-            <Spacer key={key} position="left" size="medium">
+            <Spacer key={key} pos="left" size="medium">
               <TouchableOpacity
                 onPress={() =>
                   onNavigate("RestaurantDetail", {

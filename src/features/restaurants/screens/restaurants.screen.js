@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { FlatList, View, TouchableOpacity } from "react-native";
+import { FlatList, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 import { ActivityIndicator } from "react-native-paper";
 
@@ -12,7 +12,7 @@ import { FavouritesContext } from "../../../services/favourites/favourites.conte
 import { FavouritesBar } from "../../../components/favourites/favourites-bar.component";
 // import { isAnimatedValue } from "react-native-paper/lib/typescript/src/styles/overlay";
 
-const RestaurantListContainer = styled(View)`
+const RestaurantListContainer = styled.View`
   flex: 1;
   padding-right: ${(props) => props.theme.space[3]};
   padding-left: ${(props) => props.theme.space[3]};
@@ -29,7 +29,7 @@ const Loading = styled(ActivityIndicator)`
   marginleft: -25px;
 `;
 
-const LoadingContainer = styled(View)`
+const LoadingContainer = styled.View`
   width: 50px;
   height: 50px;
   position: absolute;
@@ -42,7 +42,7 @@ const LoadingContainer = styled(View)`
 export const RestaurantsScreen = ({ navigation }) => {
   const { isLoading, restaurants } = useContext(RestaurantsContext);
   const { favourites } = useContext(FavouritesContext);
-  const [isToggled, setIsToggled] = useState(false);
+  const [isToggled, setIsToggled] = useState(true);
 
   return (
     <SafeArea>

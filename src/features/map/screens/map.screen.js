@@ -50,7 +50,7 @@ export const MapScreen = ({ navigation }) => {
                   navigation.navigate("RestaurantDetail", { restaurant })
                 }
               >
-                <MapCallout restaurant={restaurant} />
+                <MapCallout isMap restaurant={restaurant} />
               </Callout>
             </Marker>
           );

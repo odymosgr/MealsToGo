@@ -24,24 +24,33 @@ export const Search = () => {
     setSearchKeyword(keyword);
   }, [keyword]);
 
-  const RestaurantSearchBar = styled(Searchbar).attrs({
-    elevation: 3,
-    placeholder: "Search for a location",
-    icon: "map",
-    value: searchKeyword,
-    onSubmitEditing: () => {
-      search(searchKeyword);
-    },
-    onChangeText: (text) => {
-      setSearchKeyword(text);
-    },
-  })`
-    background-color: ${(props) => props.theme.colors.ui.tertiary};
-  `;
+  const onChangeSearch = (text) => setSearchKeyword(text);
+
+  // const RestaurantSearchBar = styled(Searchbar).attrs({
+  //   elevation: 3,
+  //   placeholder: "Search for a location",
+  //   icon: "map",
+  //   value: searchKeyword,
+  //   onSubmitEditing: () => {
+  //     search(searchKeyword);
+  //   },
+  //   onChangeText: onChangeSearch,
+  // })`
+  //   background-color: ${(props) => props.theme.colors.ui.tertiary};
+  // `;
 
   return (
     <SearchContainer>
-      <RestaurantSearchBar />
+      <Searchbar
+        elevation={3}
+        icon="map"
+        placeholder="Search for a location"
+        value={searchKeyword}
+        onSubmitEditing={() => {
+          search(searchKeyword);
+        }}
+        onChangeText={onChangeSearch}
+      />
     </SearchContainer>
   );
 };
