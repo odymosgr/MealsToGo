@@ -44,7 +44,7 @@ export default function App() {
         .catch((e) => {
           console.error(e);
         });
-    }, 2000);
+    }, 100);
   }, []);
 
   const [oswaldLoaded] = useOswald({
