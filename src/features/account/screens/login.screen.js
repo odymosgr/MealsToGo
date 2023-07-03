@@ -30,7 +30,7 @@ export const LoginScreen = ({ navigation }) => {
           textContentType="emailAddress"
           keyboardType="email-address"
           autoCapitalize="none"
-          onChangeText={(u) => setEmail(u)}
+          onChangeText={u => setEmail(u)}
         />
         <Spacer size="large" />
         <AuthInput
@@ -40,7 +40,7 @@ export const LoginScreen = ({ navigation }) => {
           secureTextEntry
           secure
           autoCapitalize="none"
-          onChangeText={(p) => setPassword(p)}
+          onChangeText={p => setPassword(p)}
         />
         <Spacer size="large" />
         {error && (
@@ -48,13 +48,16 @@ export const LoginScreen = ({ navigation }) => {
             <Text variant="error">{error}</Text>
           </ErrorContainer>
         )}
-        <AuthButton
-          icon="lock-open-outline"
-          mode="contained"
-          onPress={() => onLogin(email, password)}
-        >
-          Login
-        </AuthButton>
+        {!isLoading ? (
+          <AuthButton
+            icon="lock-open-outline"
+            mode="contained"
+            onPress={() => onLogin(email, password)}>
+            Login
+          </AuthButton>
+        ) : (
+          <ActivityIndicator animating={true} color={"red"} />
+        )}
       </AccountContainer>
       <Spacer size="large" />
       <AuthButton mode="contained" onPress={() => navigation.goBack()}>
