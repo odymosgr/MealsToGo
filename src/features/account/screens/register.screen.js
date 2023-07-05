@@ -32,7 +32,7 @@ export const RegisterScreen = ({ navigation }) => {
           textContentType="emailAddress"
           keyboardType="email-address"
           autoCapitalize="none"
-          onChangeText={u => setEmail(u)}
+          onChangeText={(u) => setEmail(u)}
         />
         <Spacer size="large" />
         <AuthInput
@@ -42,7 +42,7 @@ export const RegisterScreen = ({ navigation }) => {
           secureTextEntry
           secure
           autoCapitalize="none"
-          onChangeText={p => setPassword(p)}
+          onChangeText={(p) => setPassword(p)}
         />
         <Spacer size="large" />
         <AuthInput
@@ -52,7 +52,7 @@ export const RegisterScreen = ({ navigation }) => {
           secureTextEntry
           secure
           autoCapitalize="none"
-          onChangeText={p => setRepeatedPassword(p)}
+          onChangeText={(p) => setRepeatedPassword(p)}
         />
         <Spacer size="large" />
         {error && (
@@ -64,7 +64,8 @@ export const RegisterScreen = ({ navigation }) => {
           <AuthButton
             icon="email"
             mode="contained"
-            onPress={() => onRegister(email, password, repeatedPassword)}>
+            onPress={() => onRegister(email, password, repeatedPassword)}
+          >
             Register
           </AuthButton>
         ) : (

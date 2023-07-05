@@ -7,6 +7,9 @@ import { SafeArea } from "../../../src/components/utility/safe-area.component";
 import { RestaurantsNavigator } from "./restaurants.navigator";
 import { MapScreen } from "../../features/map/screens/map.screen";
 import { AuthenticationContext } from "../../services/authentication/authentication.context";
+import { RestaurantsContextProvider } from "../../services/restaurant/restaurant.context.js";
+import { LocationContextProvider } from "../../services/location/location.context.js";
+import { FavouritesContextProvider } from "../../services/favourites/favourites.context.js";
 
 const Tab = createBottomTabNavigator();
 
@@ -27,7 +30,7 @@ const Settings = () => {
 };
 
 const tabBarIcon =
-  iconName =>
+  (iconName) =>
   ({ size, color }) =>
     <Ionicons name={iconName} size={size} color={color} />;
 const screenOptions = ({ route }) => {
@@ -41,22 +44,28 @@ const screenOptions = ({ route }) => {
 
 export const AppNavigator = () => {
   return (
-    <Tab.Navigator screenOptions={screenOptions}>
-      <Tab.Screen
-        options={{ headerShown: false }}
-        name="Restaurants"
-        component={RestaurantsNavigator}
-      />
-      <Tab.Screen
-        options={{ headerShown: false }}
-        name="Map"
-        component={MapScreen}
-      />
-      <Tab.Screen
-        options={{ headerShown: false }}
-        name="Settings"
-        component={Settings}
-      />
-    </Tab.Navigator>
+    <FavouritesContextProvider>
+      <LocationContextProvider>
+        <RestaurantsContextProvider>
+          <Tab.Navigator screenOptions={screenOptions}>
+            <Tab.Screen
+              options={{ headerShown: false }}
+              name="Restaurants"
+              component={RestaurantsNavigator}
+            />
+            <Tab.Screen
+              options={{ headerShown: false }}
+              name="Map"
+              component={MapScreen}
+            />
+            <Tab.Screen
+              options={{ headerShown: false }}
+              name="Settings"
+              component={Settings}
+            />
+          </Tab.Navigator>
+        </RestaurantsContextProvider>
+      </LocationContextProvider>
+    </FavouritesContextProvider>
   );
 };

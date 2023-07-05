@@ -1,39 +1,39 @@
 import React, { useState, createContext } from "react";
-import { loginRequest } from "./authentication.service";
-import { FirebaseError } from "firebase/app";
+// import { loginRequest } from "./authentication.service";
 import {
   getAuth,
   onAuthStateChanged,
   createUserWithEmailAndPassword,
+  signOut,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 
 export const AuthenticationContext = createContext();
 
 export const AuthenticationContextProvider = ({ children }) => {
+  const auth = getAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
 
-  const auth = getAuth();
-  onAuthStateChanged(auth, usr => {
+  onAuthStateChanged(auth, (usr) => {
     if (usr) {
       setUser(usr);
-      setIsLoading(false);
-    } else {
-      setIsLoading(false);
     }
   });
 
   const onLogin = (email, password) => {
     setIsLoading(true);
-    loginRequest(email, password)
-      .then(u => {
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((u) => {
         setUser(u);
+        setError(null);
         setIsLoading(false);
       })
-      .catch(e => {
-        setIsLoading(false);
+      .catch((e) => {
         setError(e.toString());
+        setIsLoading(false);
       });
   };
 
@@ -42,39 +42,44 @@ export const AuthenticationContextProvider = ({ children }) => {
 
     if (password !== repeatedPassword) {
       setError("Error: Passwords do not match");
+      return;
     }
 
-    const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
-      .then(userCredential => {
+      .then((u) => {
         // Signed in
-        const user = userCredential.user;
+        setUser(u);
         setIsLoading(false);
       })
-      .catch(error => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+      .catch((e) => {
         setIsLoading(false);
+        setError(e.toString());
       });
   };
 
   const onLogout = () => {
-    setUser(null);
-    const auth = getAuth();
-    signOut(auth);
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        setUser(null);
+      })
+      .catch((e) => {
+        console.log("Logout error: " + e);
+      });
   };
 
   return (
     <AuthenticationContext.Provider
       value={{
-        isAuthenticated: !!user,
         user,
+        isAuthenticated: !!user,
         isLoading,
         error,
         onLogin,
         onRegister,
         onLogout,
-      }}>
+      }}
+    >
       {children}
     </AuthenticationContext.Provider>
   );
