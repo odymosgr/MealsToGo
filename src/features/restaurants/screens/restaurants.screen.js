@@ -1,16 +1,18 @@
 import React, { useContext, useState } from "react";
-import { FlatList, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 import { ActivityIndicator } from "react-native-paper";
 
 import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
 import { SafeArea } from "../../../components/utility/safe-area.component";
+import { FadeInView } from "../../../components/animations/fade.animation";
 import { RestaurantsContext } from "../../../services/restaurant/restaurant.context";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { Search } from "../components/search.component";
 import { FavouritesContext } from "../../../services/favourites/favourites.context";
 import { FavouritesBar } from "../../../components/favourites/favourites-bar.component";
 // import { isAnimatedValue } from "react-native-paper/lib/typescript/src/styles/overlay";
+import { RestaurantList } from "../components/restaurant-list.styles";
 
 const RestaurantListContainer = styled.View`
   flex: 1;
@@ -18,12 +20,6 @@ const RestaurantListContainer = styled.View`
   padding-left: ${(props) => props.theme.space[3]};
   background-color: ${(props) => props.theme.colors.ui.tertiary};
 `;
-
-const RestaurantList = styled(FlatList).attrs({
-  contentContainerStyle: {
-    padding: 16,
-  },
-})``;
 
 const Loading = styled(ActivityIndicator)`
   marginleft: -25px;
@@ -74,7 +70,9 @@ export const RestaurantsScreen = ({ navigation }) => {
                 }
               >
                 <Spacer position="bottom" size="large">
-                  <RestaurantInfoCard restaurant={item} />
+                  <FadeInView>
+                    <RestaurantInfoCard restaurant={item} />
+                  </FadeInView>
                 </Spacer>
               </TouchableOpacity>
             );
