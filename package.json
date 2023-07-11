@@ -1,5 +1,5 @@
 {
-  "name": "mealstogo",
+  "name": "Meals To Go",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
@@ -37,7 +37,8 @@
     "react-native-webview": "11.26.0",
     "react-pressable": "^0.2.0",
     "styled-components": "^6.0.0-rc.3",
-    "lottie-react-native": "5.1.4"
+    "lottie-react-native": "5.1.4",
+    "expo-camera": "~13.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
