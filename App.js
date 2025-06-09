@@ -15,12 +15,12 @@ import { AuthenticationContextProvider } from "./src/services/authentication/aut
 
 // Initialize Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyAp2SIgcvqFBJN2sjK9c0fHnabttdrNUYY",
-  authDomain: "mealstogo-c3611.firebaseapp.com",
-  projectId: "mealstogo-c3611",
-  storageBucket: "mealstogo-c3611.appspot.com",
-  messagingSenderId: "226485718954",
-  appId: "1:226485718954:web:fbbc314d7b0ffe48ec25d3",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
 let auth;
